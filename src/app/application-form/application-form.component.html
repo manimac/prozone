@@ -78,38 +78,26 @@
                   <th>Email</th>
                   <th>Status</th>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td><a routerLink="/application-view" target="_blank" >Application 1</a></td>
-                    <td>Category 1</td>
-                    <td>Sub Category 1</td>
-                    <td>June 20, 2020 5.30pm</td>
-                    <td>John Lewis</td>
-                    <td>0987654123</td>
-                    <td>john@yahoo.com</td>
-                    <td class="text-warning">Pending</td>
+                <tbody *ngIf="applicationData?.length>0">
+                  <tr *ngFor="let application of applicationData">
+                    <!-- <td><a routerLink="/application-view" target="_blank" >{{application._id}}</a></td> -->
+                    <td><a (click)="selectApplication(application._id)">{{application._id}}</a></td>
+                    <td>{{application.categoryName}}</td>
+                    <td>{{application.subCategoryName}}</td>
+                    <td>{{application.modifiedAt | date}}</td>
+                    <td>{{application.applicationName}}</td>
+                    <td>{{application.contact_no}}</td>
+                    <td>{{application.contact_email}}</td>
+                    <td class="text-warning">{{application.status}}</td>
                   </tr>
+                </tbody> 
+                <tbody *ngIf="applicationData?.length==0">
                   <tr>
-                    <td><a routerLink="/application-view" target="_blank" >Application 2</a></td>
-                    <td>Category 2</td>
-                    <td>Sub Category 1</td>
-                    <td>August 20, 2020 5.30pm</td>
-                    <td>Ken Statham</td>
-                    <td>0987654123</td>
-                    <td>ken@yahoo.com</td>
-                    <td class="text-danger">Rejected</td>
+                      <td [attr.colspan]="8">
+                          <p>No Data Found</p>
+                      </td>
                   </tr>
-                  <tr>
-                    <td><a routerLink="/application-view" target="_blank" >Application 3</a></td>
-                    <td>Category 1</td>
-                    <td>Sub Category 1</td>
-                    <td>July 20, 2020 5.30pm</td>
-                    <td>Jane</td>
-                    <td>0987654123</td>
-                    <td>jane@yahoo.com</td>
-                    <td class="text-success">Completed</td>
-                  </tr>
-                </tbody>
+              </tbody>
               </table>
 
               <!-- <div class="mat-elevation-z8">
